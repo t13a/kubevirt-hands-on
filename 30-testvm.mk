@@ -16,14 +16,13 @@ testvm/create:
 testvm/delete:
 	kubectl delete -f https://kubevirt.io/labs/manifests/vm.yaml  --force --grace-period=0 --ignore-not-found
 
+testvm_is_running = [ "$$(kubectl get vm/testvm -o jsonpath={.spec.running})" == true ]
+
 .PHONY: testvm/start
 testvm/start:
-	virtctl start testvm
+	if ! $(testvm_is_running); then virtctl start testvm; fi
+	while ! kubectl wait vm/testvm --for=jsonpath={.status.ready}=true; do echo waiting...; done
 
 .PHONY: testvm/stop
 testvm/stop:
-	virtctl stop testvm
-
-.PHONY: testvm/console
-testvm/console:
-	@virtctl console testvm
+	if $(testvm_is_running); then virtctl stop testvm; fi
