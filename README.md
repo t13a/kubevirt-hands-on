@@ -10,6 +10,7 @@ A KubeVirt hands-on resource.
 
 ## Prerequisites
 
+- Docker
 - Nix
 
 ## Setup
