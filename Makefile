@@ -8,6 +8,7 @@ include *.mk
 up: \
 	kind/up \
 	kubevirt/up \
+	kubevirt-manager/install \
 	testvm/up
 
 .PHONY: down

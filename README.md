@@ -5,6 +5,7 @@ A KubeVirt hands-on resource.
 # Features
 
 - Follow [official quickstart with kind](https://kubevirt.io/quickstart_kind/).
+- Built-in [kubevirt-manager](https://kubevirt-manager.io/).
 
 # Getting started
 
@@ -36,6 +37,16 @@ Successfully connected to testvm console. The escape sequence is ^]
 
 login as 'cirros' user. default password: 'gocubsgo'. use 'sudo' for root.
 testvm login:
+```
+
+## Connect to kubevirt-manager
+
+```sh
+[nix-shell:~kubevirt-hands-on]$ make kubevirt-manager/port-forward
+kubectl port-forward -n kubevirt-manager svc/kubevirt-manager 8080:8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+...
 ```
 
 ## Teardown
